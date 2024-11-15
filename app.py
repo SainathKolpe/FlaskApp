@@ -1,5 +1,6 @@
 from flask import Flask, render_template, jsonify
 import pandas as pd
+import os
 
 app = Flask(__name__)
 
@@ -10,8 +11,8 @@ def index():
 @app.route('/data')
 def get_data():
     try:
-        # Provide the full path to the Excel file
-        file_path = r"C:\Users\hp\OneDrive\Documents\Internship\Excel-to-web\static\DT.xlsx"# Adjust this path
+        # Construct the full path to the Excel file using app.root_path
+        file_path = os.path.join(app.root_path, 'static', 'DT.xlsx')
 
         # Read the Excel file
         dataframe = pd.read_excel(file_path)
@@ -41,3 +42,4 @@ def get_data():
 
 if __name__ == '__main__':
     app.run(debug=True)
+

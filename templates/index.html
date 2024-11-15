@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Data Summary</title>
+    <style>
+        body {
+            background-color: #f0f2f5;
+            font-family: Arial, sans-serif;
+        }
+        .table-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #1976d2;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="table-container">
+    <h2>Project Data Summary</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Project Name</th>
+                <th>Total No. of Files</th>
+                <th colspan="3">Curation</th>
+                <th colspan="3">Translation</th>
+                <th colspan="3">Post Processing</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th></th>
+                <th>No. of Files Assigned</th>
+                <th>No. of Files Submitted</th>
+                <th>Avg Time per File</th>
+                <th>No. of Files Assigned</th>
+                <th>No. of Files Submitted</th>
+                <th>Avg Time per File</th>
+                <th>No. of Ep Assigned</th>
+                <th>No. of Ep Submitted</th>
+                <th>Avg Time per Ep</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+            <!-- Data will be dynamically inserted here -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    // Function to fetch and update the table data
+    async function fetchData() {
+        try {
+            const response = await fetch('/data');
+            if (!response.ok) {
+                console.error('Failed to fetch data:', response.statusText);
+                return;
+            }
+
+            const data = await response.json();
+            const tableBody = document.getElementById('table-body');
+            tableBody.innerHTML = ''; // Clear existing table rows
+
+            // Populate the table with fetched data
+            data.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${row.Project_Name || 'N/A'}</td>
+                    <td>${row.Total_no_file || 'N/A'}</td>
+                    <td>${row.Curation_No_of_files_Assigned || 'N/A'}</td>
+                    <td>${row.Curation_No_files_Submitted || 'N/A'}</td>
+                    <td>${row.Curation_Average_time_per_file || 'N/A'}</td>
+                    <td>${row.Translation_No_of_Files_Assigned || 'N/A'}</td>
+                    <td>${row.Translation_No_of_Files_Submitted || 'N/A'}</td>
+                    <td>${row.Translation_Average_time_per_file || 'N/A'}</td>
+                    <td>${row.Post_Processing_No_Ep_Assigned || 'N/A'}</td>
+                    <td>${row.Post_Processing_No_Ep_Submitted || 'N/A'}</td>
+                    <td>${row.Post_Processing_Average_time_per_Ep || 'N/A'}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
+    // Auto-fetch data every 3 seconds
+    setInterval(fetchData, 3000);
+    
+    // Initial fetch
+    fetchData();
+</script>
+
+</body>
+</html>

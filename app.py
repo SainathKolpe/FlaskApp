@@ -12,8 +12,14 @@ scope = ["https://spreadsheets.google.com/feeds",
          "https://www.googleapis.com/auth/drive"]
 
 # Path to your JSON credentials file
-creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
+import os
+from oauth2client.service_account import ServiceAccountCredentials
+
+# Use Render's environment variable for the secret file path
+credentials_path = os.environ.get('GOOGLE_APPLICATION_CREDENTIALS', 'credentials.json')
+creds = ServiceAccountCredentials.from_json_keyfile_name(credentials_path, scope)
 client = gspread.authorize(creds)
+
 
 # Function to fetch data from Google Sheets
 def fetch_data_from_google_sheets():

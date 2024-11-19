@@ -4,64 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Data Summary</title>
+    <!-- Include Bootstrap for responsiveness -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         body {
             background-color: #f0f2f5;
             font-family: Arial, sans-serif;
         }
         .table-container {
-            max-width: 1200px;
-            margin: 0 auto;
+            margin: 20px auto;
             padding: 20px;
             background: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 12px;
-            border: 1px solid #ddd;
+        h2 {
             text-align: center;
+            margin-bottom: 20px;
+            color: #1976d2;
         }
         th {
-            background-color: #1976d2;
-            color: #fff;
+            background-color: #1976d2 !important;
+            color: #fff !important;
+            text-align: center;
+        }
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="table-container">
+<div class="container table-container">
     <h2>Project Data Summary</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Project Name</th>
-                <th>Total No. of Files</th>
-                <th colspan="3">Curation</th>
-                <th colspan="3">Translation</th>
-                <th colspan="3">Post Processing</th>
-            </tr>
-            <tr>
-                <th></th>
-                <th></th>
-                <th>No. of Files Assigned</th>
-                <th>No. of Files Submitted</th>
-                <th>Avg Time per File</th>
-                <th>No. of Files Assigned</th>
-                <th>No. of Files Submitted</th>
-                <th>Avg Time per File</th>
-                <th>No. of Ep Assigned</th>
-                <th>No. of Ep Submitted</th>
-                <th>Avg Time per Ep</th>
-            </tr>
-        </thead>
-        <tbody id="table-body">
-            <!-- Data will be dynamically inserted here -->
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th rowspan="2">Project Name</th>
+                    <th rowspan="2">Total No. of Files</th>
+                    <th colspan="3">Curation</th>
+                    <th colspan="3">Translation</th>
+                    <th colspan="3">Post Processing</th>
+                </tr>
+                <tr>
+                    <th>No. of Files Assigned</th>
+                    <th>No. of Files Submitted</th>
+                    <th>Avg Time per File</th>
+                    <th>No. of Files Assigned</th>
+                    <th>No. of Files Submitted</th>
+                    <th>Avg Time per File</th>
+                    <th>No. of Ep Assigned</th>
+                    <th>No. of Ep Submitted</th>
+                    <th>Avg Time per Ep</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                <!-- Data will be dynamically inserted here -->
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <script>
@@ -110,3 +115,4 @@
 
 </body>
 </html>
+
